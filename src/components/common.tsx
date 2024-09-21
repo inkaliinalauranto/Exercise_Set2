@@ -16,7 +16,7 @@ export const Navigation = styled.div`
 `
 
 // Tehtävä 2
-export const HomeButton = styled.button`
+export const NavigationButton = styled.button`
   margin-left: 2rem;
   background: #7A2048;
   color: white;
@@ -26,7 +26,6 @@ export const HomeButton = styled.button`
   font-weight: bold;
   border-radius: 6px;
 `
-
 
 export const TotalPoints = styled.div`
   color: white;

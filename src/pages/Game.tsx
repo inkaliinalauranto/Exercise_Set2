@@ -1,5 +1,6 @@
 import { CSSProperties, useState } from "react"
-import { Layout, Navigation, HomeButton, TotalPoints } from "../components/common"
+import { Layout, Navigation, NavigationButton, TotalPoints } from "../components/common"
+import { Link, Outlet } from "react-router-dom"
 
 interface BallProps {
   maxCount: number
@@ -72,10 +73,12 @@ export function Game() {
     <>
       <Layout>
         <Navigation>
-          <HomeButton>Koti</HomeButton>
+          <Link to="/"><NavigationButton>Koti</NavigationButton></Link>
           <TotalPoints>Kokonaispisteet: 0</TotalPoints>
         </Navigation>
         {allBalls}
+
+        <Outlet />
       </Layout>
     </>
   )
