@@ -1,6 +1,7 @@
-import { CSSProperties, useState } from "react"
-import { Layout, Navigation, NavigationButton, TotalPoints } from "../components/common"
+import { CSSProperties, FormEvent, useEffect, useState } from "react"
+import { GameOverButton, GameOver, Layout, Navigation, NavigationButton, Overlay, TotalPoints } from "../components/common"
 import { Link, Outlet } from "react-router-dom"
+import { addPointsToDb } from "../services/supabase_client"
 
 interface BallProps {
   maxCount: number
@@ -8,17 +9,71 @@ interface BallProps {
   y: number
 }
 
+interface GameOverProps {
+  setShowGameOver: (p: boolean) => void
+}
+
+
+function GameOverView({ setShowGameOver }: GameOverProps) {
+  const [points, setPoints] = useState(50)
+  const [nickname, setNickname] = useState("")
+
+  const onSave = async () => {
+    if (!nickname) { return }
+    addPointsToDb(nickname, points)
+    setShowGameOver(false)
+
+  }
+
+  const headerStyle: CSSProperties = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    height: "30px",
+    background: "yellow",
+    fontWeight: "bold"
+  }
+
+  function handleInput(e: FormEvent) {
+    const inputElement: HTMLInputElement = e.target as HTMLInputElement
+    const inputValue: string = inputElement.value
+    setNickname(inputValue)
+  }
+
+  return (
+    <Overlay>
+      <GameOver>
+        <div style={headerStyle}>
+          <p>Peli päättyi</p>
+          <p onClick={() => { setShowGameOver(false) }}>X</p>
+        </div>
+        <h3>Pisteet: {points}</h3>
+        <label htmlFor="nickname">Nimimerkki</label>
+        <input
+          value={nickname}
+          onInput={(e) => { handleInput(e) }}
+          id="nickname"
+          type="text" />
+        <Link to="/"><GameOverButton onClick={onSave}>Tallenna</GameOverButton></Link>
+      </GameOver>
+      <Outlet />
+    </Overlay>
+  )
+}
+
 
 function Ball({ maxCount, x, y }: BallProps) {
   const [clicked, setClicked] = useState(0)
 
-  /* Funktio asetetaan komponentista palautettavan divin onClickille 
-  viitteenä eikä funktiokutsuna, koska funktiota halutaan kutsua vasta, 
-  kun klikkaus tapahtuu. */
-  const handleClick = (() => {
+  /* Tässä muuttujassa oleva funktio asetetaan komponentista palautettavan 
+  divin onClickille. Funktiota ei kuitenkaan suoraan kutsuta onClickissä, 
+  jotta kutsuminen tapahtuu ainoastaan klikkausten yhteydessä eikä 
+  esimerkiksi heti alussa. */
+  const handleClick = () => {
     const newClickCount = clicked + 1
     setClicked(newClickCount)
-  })
+  }
 
   // Tehtävä 2
   const completedStyle: CSSProperties = {
@@ -72,6 +127,17 @@ function randomInteger(min: number, max: number) {
 
 
 export function Game() {
+  const [totalPoints, setTotalPoints] = useState(40)
+  const [showGameOver, setShowGameOver] = useState(false)
+
+
+  useEffect(() => {
+    if (totalPoints === 40) {
+      setShowGameOver(true)
+      setTotalPoints(20)
+    }
+  })
+
   const allBalls = Array(20).fill(null).map((_, i) => {
     return <Ball
       key={i}
@@ -87,14 +153,17 @@ export function Game() {
     
     Kirjaston GitHub-repositorio: 
     https://github.com/remix-run/react-router*/
+
+    // Aaltosulut mahdollistavat, että JS:ää voidaan käyttää
+    // niiden sisällä
     <>
       <Layout>
         <Navigation>
           <Link to="/"><NavigationButton>Koti</NavigationButton></Link>
-          <TotalPoints>Kokonaispisteet: 0</TotalPoints>
+          <TotalPoints>Kokonaispisteet: {totalPoints}</TotalPoints>
         </Navigation>
         {allBalls}
-
+        {showGameOver && <GameOverView setShowGameOver={setShowGameOver}></GameOverView>}
         <Outlet />
       </Layout>
     </>

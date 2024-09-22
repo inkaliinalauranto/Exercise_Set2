@@ -6,6 +6,31 @@ uudelleenkäytettävien tyylikomponenttien tekemiseksi.
 Kirjaston GitHub-repositorio:
 https://github.com/styled-components/styled-components */
 
+export const GameOver = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 8px 20px 8px;
+  gap: 12px;
+  background: white;
+  height: fit-content;
+  width: 15rem;
+  box-shadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px";
+  border-radius: 8px;
+`
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100dvh;
+  background: #a9a9a99c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 export const Layout = styled.div`
   background: pink;
   width: 100vw;
@@ -23,6 +48,16 @@ export const Navigation = styled.div`
 
 export const NavigationButton = styled.button`
   margin-left: 2rem;
+  background: #7A2048;
+  color: white;
+  border: 1px solid white;
+  padding: 10px 20px;
+  font-size: medium;
+  font-weight: bold;
+  border-radius: 6px;
+`
+
+export const GameOverButton = styled.button`
   background: #7A2048;
   color: white;
   border: 1px solid white;
