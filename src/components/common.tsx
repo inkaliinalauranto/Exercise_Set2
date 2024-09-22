@@ -1,5 +1,11 @@
 import styled from "styled-components"
 
+/* Tehtävä 2: styled-components-kirjaston hyödyntäminen itsekustomoitujen 
+uudelleenkäytettävien tyylikomponenttien tekemiseksi. 
+
+Kirjaston GitHub-repositorio:
+https://github.com/styled-components/styled-components */
+
 export const Layout = styled.div`
   background: pink;
   width: 100vw;
@@ -15,7 +21,6 @@ export const Navigation = styled.div`
   align-items: center;
 `
 
-// Tehtävä 2
 export const NavigationButton = styled.button`
   margin-left: 2rem;
   background: #7A2048;

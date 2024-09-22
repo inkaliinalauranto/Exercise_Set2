@@ -12,15 +12,26 @@ interface BallProps {
 function Ball({ maxCount, x, y }: BallProps) {
   const [clicked, setClicked] = useState(0)
 
+  /* Funktio asetetaan komponentista palautettavan divin onClickille 
+  viitteenä eikä funktiokutsuna, koska funktiota halutaan kutsua vasta, 
+  kun klikkaus tapahtuu. */
+  const handleClick = (() => {
+    setClicked(clicked + 1)
+  })
+
   // Tehtävä 2
-  const xStyle: CSSProperties = {
+  const completedStyle: CSSProperties = {
     transform: `translate(${x}px, ${y}px)`,
     color: `#7A2048`
   }
 
   if (clicked >= maxCount) {
-    // Tehtävä 2
-    return <div style={xStyle}>Valmis!</div>
+    /* Tehtävä 2. Kun pallon on "poksautettu" eli palloa on klikattu 
+    maxCount-parametrissa olevan lukeman verran, generoidaan pallon sijaan 
+    teksti "Valmis!". Annetaan tekstille completedStyle-muuttujaan talletettu 
+    tyyli, jolla teksti asetetaan samaan kohtaan, jossa poksautettu pallo 
+    oli. */
+    return <div style={completedStyle}>Valmis!</div>
   }
 
   /*Tässä tyyli luodaan komponentin sisällä, koska tyylistä 
@@ -46,7 +57,7 @@ function Ball({ maxCount, x, y }: BallProps) {
   return <>
     <div
       style={ballStyle}
-      onClick={() => { setClicked(clicked + 1) }}>
+      onClick={handleClick}>
       {clicked} / {maxCount}
     </div>
   </>
@@ -70,6 +81,11 @@ export function Game() {
   })
 
   return (
+    /* Tehtävä 2: navigointi React-router-kirjaston Link- ja 
+    Outlet-komponentteja hyödyntämällä.
+    
+    Kirjaston GitHub-repositorio: 
+    https://github.com/remix-run/react-router*/
     <>
       <Layout>
         <Navigation>

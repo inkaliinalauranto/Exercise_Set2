@@ -1,6 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 import { Database } from "./supabase.ts"
 
+/* Tehtävä 2: Supabasen hyödyntäminen pelisuoritustietojen 
+Supabase-tietokantaan siirtämisessä ja siellä säilyttämisessä.
+
+Kirjaston dokumentaatio: 
+https://supabase.com/docs/reference/javascript/start */
+
 const supabaseUrl = 'https://pvvokutjnjbehmiwoxow.supabase.co'
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
 
