@@ -16,7 +16,8 @@ function Ball({ maxCount, x, y }: BallProps) {
   viitteenä eikä funktiokutsuna, koska funktiota halutaan kutsua vasta, 
   kun klikkaus tapahtuu. */
   const handleClick = (() => {
-    setClicked(clicked + 1)
+    const newClickCount = clicked + 1
+    setClicked(newClickCount)
   })
 
   // Tehtävä 2
