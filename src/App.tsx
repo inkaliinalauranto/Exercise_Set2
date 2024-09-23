@@ -11,8 +11,7 @@ export default function App() {
     </Navigation>
     <input type={nickname} onChange={(e) => { setNickname(e.target.value) }} />
     <button onClick={() => { addPointsToDb(nickname, 0) }}>Testaa supabase-yhteys</button>
-    Nimimerkki: {nickname}
-
+    <p>Nimimerkki: {nickname}</p>
     <Outlet />
   </Layout>
 }

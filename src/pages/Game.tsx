@@ -1,5 +1,5 @@
 import { CSSProperties, FormEvent, useEffect, useState } from "react"
-import { GameOverButton, GameOver, Layout, Navigation, NavigationButton, Overlay, TotalPoints } from "../components/common"
+import { GameOverButton, GameOver, Layout, Navigation, NavigationButton, Overlay, TotalPoints, GameOverElement } from "../components/common"
 import { Link, Outlet } from "react-router-dom"
 import { addPointsToDb } from "../services/supabase_client"
 
@@ -15,7 +15,7 @@ interface GameOverProps {
   points: number
 }
 
-
+// Selitä
 function GameOverView({ setShowGameOver, points }: GameOverProps) {
   const [nickname, setNickname] = useState("")
 
@@ -24,16 +24,6 @@ function GameOverView({ setShowGameOver, points }: GameOverProps) {
     addPointsToDb(nickname, points)
     setShowGameOver(false)
 
-  }
-
-  const headerStyle: CSSProperties = {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-    height: "30px",
-    background: "yellow",
-    fontWeight: "bold"
   }
 
   function handleInput(e: FormEvent) {
@@ -45,16 +35,17 @@ function GameOverView({ setShowGameOver, points }: GameOverProps) {
   return (
     <Overlay>
       <GameOver>
-        <div style={headerStyle}>
-          <p>Läpäisit pelin!</p>
-        </div>
-        <h3>Pisteet: {points}</h3>
-        <label htmlFor="nickname">Nimimerkki</label>
-        <input
-          value={nickname}
-          onInput={(e) => { handleInput(e) }}
-          id="nickname"
-          type="text" />
+        <p>Läpäisit pelin!</p>
+        <GameOverElement><h3>Pisteet: {points}</h3></GameOverElement>
+        <GameOverElement><label htmlFor="nickname">Nimimerkki:</label></GameOverElement>
+        <GameOverElement>
+          <input
+            value={nickname}
+            onInput={(e) => { handleInput(e) }}
+            id="nickname"
+            type="text" />
+        </GameOverElement>
+
         <Link to="/"><GameOverButton onClick={onSave}>Tallenna</GameOverButton></Link>
         <Link to="/"><GameOverButton>Ohita</GameOverButton></Link>
       </GameOver>
@@ -157,22 +148,22 @@ export function Game() {
   const [propertiesForBalls] = useState(
     Array(5).fill(null).map((_, i) => {
       return {
-        key: i, 
-        maxCount: randomInteger(1, 6), 
-        x: randomInteger(Math.round(0.1 * window.innerWidth), Math.round(window.innerWidth - 0.1 * window.innerWidth)), 
+        key: i,
+        maxCount: randomInteger(1, 6),
+        x: randomInteger(Math.round(0.1 * window.innerWidth), Math.round(window.innerWidth - 0.1 * window.innerWidth)),
         y: randomInteger(Math.round(0.05 * window.innerHeight), Math.round(window.innerHeight - 0.3 * window.innerHeight))
       }
     })
   )
 
-  
+
+  // Selitä
   useEffect(() => {
     let sum = 0
-    propertiesForBalls.forEach((ball) => sum += ball.maxCount)
+    propertiesForBalls.forEach((propertyObject) => { sum += propertyObject.maxCount })
 
     if (currentPoints >= sum) {
       setShowGameOver(true)
-      setTotalPoints(0)
     }
   })
 
@@ -210,7 +201,7 @@ export function Game() {
       <Layout>
         <Navigation>
           <Link to="/"><NavigationButton>Koti</NavigationButton></Link>
-          <TotalPoints>Kokonaispisteet: {currentPoints}</TotalPoints>
+          <TotalPoints>Pisteet: {currentPoints}</TotalPoints>
         </Navigation>
         {allBalls}
         {showGameOver && <GameOverView setShowGameOver={setShowGameOver} points={currentPoints}></GameOverView>}
