@@ -81,6 +81,3 @@ export const TotalPoints = styled.div`
   margin-left: 2rem;
   font-size: x-large;
 `
-export const InputField = styled.div`
-  cursor: auto;
-`

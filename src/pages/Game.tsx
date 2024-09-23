@@ -1,119 +1,8 @@
-import { CSSProperties, FormEvent, useEffect, useState } from "react"
-import { GameOverButton, GameOver, Layout, Navigation, NavigationButton, Overlay, TotalPoints, GameOverElement } from "../components/common"
+import { useEffect, useState } from "react"
+import { Layout, Navigation, NavigationButton, TotalPoints } from "../components/common"
 import { Link, Outlet } from "react-router-dom"
-import { addPointsToDb } from "../services/supabase_client"
-
-interface BallProps {
-  maxCount: number
-  x: number
-  y: number
-  handlePointsFromChild: (num: number) => void
-}
-
-interface GameOverProps {
-  setShowGameOver: (p: boolean) => void
-  points: number
-}
-
-// Selitä
-function GameOverView({ setShowGameOver, points }: GameOverProps) {
-  const [nickname, setNickname] = useState("")
-
-  const onSave = async () => {
-    if (!nickname) { return }
-    addPointsToDb(nickname, points)
-    setShowGameOver(false)
-
-  }
-
-  function handleInput(e: FormEvent) {
-    const inputElement: HTMLInputElement = e.target as HTMLInputElement
-    const inputValue: string = inputElement.value
-    setNickname(inputValue)
-  }
-
-  return (
-    <Overlay>
-      <GameOver>
-        <p>Läpäisit pelin!</p>
-        <GameOverElement><h3>Pisteet: {points}</h3></GameOverElement>
-        <GameOverElement><label htmlFor="nickname">Nimimerkki:</label></GameOverElement>
-        <GameOverElement>
-          <input
-            value={nickname}
-            onInput={(e) => { handleInput(e) }}
-            id="nickname"
-            type="text" />
-        </GameOverElement>
-
-        <Link to="/"><GameOverButton onClick={onSave}>Tallenna</GameOverButton></Link>
-        <Link to="/"><GameOverButton>Ohita</GameOverButton></Link>
-      </GameOver>
-      <Outlet />
-    </Overlay>
-  )
-}
-
-
-function Ball({ maxCount, x, y, handlePointsFromChild }: BallProps) {
-  const [clicked, setClicked] = useState(0)
-
-  /* Tässä muuttujassa oleva funktio asetetaan komponentista palautettavan 
-  divin onClickille. Funktiota ei kuitenkaan suoraan kutsuta onClickissä, 
-  jotta kutsuminen tapahtuu ainoastaan klikkausten yhteydessä eikä 
-  esimerkiksi heti alussa. */
-  const handleClick = () => {
-    const newClickCount = clicked + 1
-    setClicked(newClickCount)
-
-    if (newClickCount >= maxCount) {
-      handlePointsFromChild(newClickCount)
-    }
-  }
-
-  // Tehtävä 2
-  const completedStyle: CSSProperties = {
-    transform: `translate(${x}px, ${y}px)`,
-    color: `#7A2048`
-  }
-
-  if (clicked >= maxCount) {
-    /* Tehtävä 2. Kun pallon on "poksautettu" eli palloa on klikattu 
-    maxCount-parametrissa olevan lukeman verran, generoidaan pallon sijaan 
-    teksti "Valmis!". Annetaan tekstille completedStyle-muuttujaan talletettu 
-    tyyli, jolla teksti asetetaan samaan kohtaan, jossa poksautettu pallo 
-    oli. */
-    return <div style={completedStyle}>Valmis!</div>
-  }
-
-  /*Tässä tyyli luodaan komponentin sisällä, koska tyylistä 
-  halutaan dynaaminen. */
-  const ballStyle: CSSProperties = {
-    background: "#7A2048",
-    width: 50 + "px",
-    height: 50 + "px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: "50%",
-    border: "2px solid white",
-    color: "white",
-    position: "absolute",
-    userSelect: "none",
-    cursor: "pointer",
-    transform: `translate(${x}px, ${y}px)`,
-    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-    padding: "5px"
-  }
-
-  return <>
-    <div
-      style={ballStyle}
-      onClick={handleClick}>
-      {clicked} / {maxCount}
-    </div>
-  </>
-}
+import { Ball } from "../components/Ball"
+import { GameOverBox } from "../components/GameOverBox"
 
 
 function randomInteger(min: number, max: number) {
@@ -126,13 +15,13 @@ export function Game() {
   const [currentPoints, setTotalPoints] = useState(0)
   const [showGameOver, setShowGameOver] = useState(false)
 
-  /* Kun alla olevien kullekin pallolle generoitujen objektien arvot asetettin 
-  suoraan allBalls-muuttujaan, joka asetettiin suoraan returniin, arvot 
-  muuttuivat aina, kun pallo poksautettiin. Arvot muuttuivat, koska 
-  Ball-komponentissa kutsuttiin tästä komponentista välitettyä
-  handlePointsFromChild-muuttujaa, jossa muutetaan tämän Game-komponentin 
+  /* Kun alla arrayhyn palautettavien kullekin pallolle generoitujen objektien 
+  arvot asetettin suoraan allBalls-muuttujaan, joka asetettiin suoraan 
+  returniin, arvot muuttuivat aina, kun pallo poksautettiin. Arvot muuttuivat, 
+  koska Ball-komponentissa kutsuttiin tästä komponentista välitettyä
+  setPointsFromBall-muuttujaa, jossa muutetaan tämän Game-komponentin 
   tilamuuttujaa (currentPoints). Tilamuuttujan arvon muutos laukaisee tässä 
-  komponentissa hook-muuttujia lukuunottamatta uudelleenrenderöintiä, minkä
+  komponentissa uudelleenrenderöinnin hook-muuttujia lukuunottamatta, minkä
   vuoksi pallot arvottueine maxCount-, x- ja y-arvoineen luotiin uudestaan. 
   Siksi pallot vaihtoivat paikkaa ja niissä olevaa maksimiklikkauslukua.
 
@@ -156,7 +45,6 @@ export function Game() {
     })
   )
 
-
   // Selitä
   useEffect(() => {
     let sum = 0
@@ -167,10 +55,9 @@ export function Game() {
     }
   })
 
-  const handlePointsFromChild = (points: number) => {
+  const setPointsFromBall = (points: number) => {
     setTotalPoints(currentPoints + points)
   }
-
 
   /* Luodaan propertiesForBalls-arrayssa olevien alkioiden verran palloja. 
   Kunkin alkion objektin arvot haetaan kunkin pallon propseiksi. Propseihin 
@@ -184,7 +71,7 @@ export function Game() {
       maxCount={ballProperties.maxCount}
       x={ballProperties.x}
       y={ballProperties.y}
-      handlePointsFromChild={handlePointsFromChild}>
+      handlePointsFromChild={setPointsFromBall}>
     </Ball>
   })
 
@@ -204,7 +91,7 @@ export function Game() {
           <TotalPoints>Pisteet: {currentPoints}</TotalPoints>
         </Navigation>
         {allBalls}
-        {showGameOver && <GameOverView setShowGameOver={setShowGameOver} points={currentPoints}></GameOverView>}
+        {showGameOver && <GameOverBox setShowGameOver={setShowGameOver} points={currentPoints}></GameOverBox>}
         <Outlet />
       </Layout>
     </>
