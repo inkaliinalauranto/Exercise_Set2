@@ -7,15 +7,16 @@ interface BallProps {
   maxCount: number
   x: number
   y: number
+  handlePointsFromChild: (num: number) => void
 }
 
 interface GameOverProps {
   setShowGameOver: (p: boolean) => void
+  points: number
 }
 
 
-function GameOverView({ setShowGameOver }: GameOverProps) {
-  const [points, setPoints] = useState(50)
+function GameOverView({ setShowGameOver, points }: GameOverProps) {
   const [nickname, setNickname] = useState("")
 
   const onSave = async () => {
@@ -45,8 +46,7 @@ function GameOverView({ setShowGameOver }: GameOverProps) {
     <Overlay>
       <GameOver>
         <div style={headerStyle}>
-          <p>Peli päättyi</p>
-          <p onClick={() => { setShowGameOver(false) }}>X</p>
+          <p>Läpäisit pelin!</p>
         </div>
         <h3>Pisteet: {points}</h3>
         <label htmlFor="nickname">Nimimerkki</label>
@@ -56,6 +56,7 @@ function GameOverView({ setShowGameOver }: GameOverProps) {
           id="nickname"
           type="text" />
         <Link to="/"><GameOverButton onClick={onSave}>Tallenna</GameOverButton></Link>
+        <Link to="/"><GameOverButton>Ohita</GameOverButton></Link>
       </GameOver>
       <Outlet />
     </Overlay>
@@ -63,7 +64,7 @@ function GameOverView({ setShowGameOver }: GameOverProps) {
 }
 
 
-function Ball({ maxCount, x, y }: BallProps) {
+function Ball({ maxCount, x, y, handlePointsFromChild }: BallProps) {
   const [clicked, setClicked] = useState(0)
 
   /* Tässä muuttujassa oleva funktio asetetaan komponentista palautettavan 
@@ -73,6 +74,10 @@ function Ball({ maxCount, x, y }: BallProps) {
   const handleClick = () => {
     const newClickCount = clicked + 1
     setClicked(newClickCount)
+
+    if (newClickCount >= maxCount) {
+      handlePointsFromChild(newClickCount)
+    }
   }
 
   // Tehtävä 2
@@ -127,23 +132,68 @@ function randomInteger(min: number, max: number) {
 
 
 export function Game() {
-  const [totalPoints, setTotalPoints] = useState(40)
+  const [currentPoints, setTotalPoints] = useState(0)
   const [showGameOver, setShowGameOver] = useState(false)
 
+  /* Kun alla olevien kullekin pallolle generoitujen objektien arvot asetettin 
+  suoraan allBalls-muuttujaan, joka asetettiin suoraan returniin, arvot 
+  muuttuivat aina, kun pallo poksautettiin. Arvot muuttuivat, koska 
+  Ball-komponentissa kutsuttiin tästä komponentista välitettyä
+  handlePointsFromChild-muuttujaa, jossa muutetaan tämän Game-komponentin 
+  tilamuuttujaa (currentPoints). Tilamuuttujan arvon muutos laukaisee tässä 
+  komponentissa hook-muuttujia lukuunottamatta uudelleenrenderöintiä, minkä
+  vuoksi pallot arvottueine maxCount-, x- ja y-arvoineen luotiin uudestaan. 
+  Siksi pallot vaihtoivat paikkaa ja niissä olevaa maksimiklikkauslukua.
 
+  Nyt pallojen ominaisuudet on asetettu objekteiksi arrayn sisälle 
+  hook-muuttujaan, jonka arvo ilmeisesti pystyy samana komponentin 
+  uudelleenrenderöinnin yhteydessä. Tämän ratkaisun hakemisessa käytin 
+  ChatGPT:ä. (Esitetty ongelma: Ball components move every time the points 
+  are updated). ChatGPT neuvoi luomaan arrayn useStatessa anonyymin 
+  nuolifunktion toteutusosassa, mutta tästä poiketen asetin arrayn suoraan 
+  hook-muuttujan alkuarvoksi, jotta pystyn käymään objektien 
+  maxCount-arvot läpi useEffectissä.*/
+
+  const [propertiesForBalls] = useState(
+    Array(5).fill(null).map((_, i) => {
+      return {
+        key: i, 
+        maxCount: randomInteger(1, 6), 
+        x: randomInteger(Math.round(0.1 * window.innerWidth), Math.round(window.innerWidth - 0.1 * window.innerWidth)), 
+        y: randomInteger(Math.round(0.05 * window.innerHeight), Math.round(window.innerHeight - 0.3 * window.innerHeight))
+      }
+    })
+  )
+
+  
   useEffect(() => {
-    if (totalPoints === 40) {
+    let sum = 0
+    propertiesForBalls.forEach((ball) => sum += ball.maxCount)
+
+    if (currentPoints >= sum) {
       setShowGameOver(true)
-      setTotalPoints(20)
+      setTotalPoints(0)
     }
   })
 
-  const allBalls = Array(20).fill(null).map((_, i) => {
+  const handlePointsFromChild = (points: number) => {
+    setTotalPoints(currentPoints + points)
+  }
+
+
+  /* Luodaan propertiesForBalls-arrayssa olevien alkioiden verran palloja. 
+  Kunkin alkion objektin arvot haetaan kunkin pallon propseiksi. Propseihin 
+  kullekin pallolle lisätään viite funktioon, jonka avulla Game-komponentissa 
+  saadaan pidettyä lukua pelaajan pisteistä eli siitä klikkausmäärästä, joilla 
+  pelaaja on saanut palloja poksautettua.
+  */
+  const allBalls = propertiesForBalls.map((ballProperties) => {
     return <Ball
-      key={i}
-      maxCount={randomInteger(1, 6)}
-      x={randomInteger(Math.round(0.1 * window.innerWidth), Math.round(window.innerWidth - 0.1 * window.innerWidth))}
-      y={randomInteger(Math.round(0.05 * window.innerHeight), Math.round(window.innerHeight - 0.3 * window.innerHeight))}>
+      key={ballProperties.key}
+      maxCount={ballProperties.maxCount}
+      x={ballProperties.x}
+      y={ballProperties.y}
+      handlePointsFromChild={handlePointsFromChild}>
     </Ball>
   })
 
@@ -160,10 +210,10 @@ export function Game() {
       <Layout>
         <Navigation>
           <Link to="/"><NavigationButton>Koti</NavigationButton></Link>
-          <TotalPoints>Kokonaispisteet: {totalPoints}</TotalPoints>
+          <TotalPoints>Kokonaispisteet: {currentPoints}</TotalPoints>
         </Navigation>
         {allBalls}
-        {showGameOver && <GameOverView setShowGameOver={setShowGameOver}></GameOverView>}
+        {showGameOver && <GameOverView setShowGameOver={setShowGameOver} points={currentPoints}></GameOverView>}
         <Outlet />
       </Layout>
     </>
