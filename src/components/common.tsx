@@ -20,6 +20,12 @@ export const Navigation = styled.div`
   justify-content: space-between;
   align-items: center;
 `
+export const DescriptionStyle = styled.div`
+  color: white;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  font-size: x-large;
+`
 
 export const NavigationButton = styled.button`
   margin-left: 2rem;
@@ -31,6 +37,9 @@ export const NavigationButton = styled.button`
   font-size: medium;
   font-weight: bold;
   border-radius: 6px;
+  &:hover {
+    background-color: #8d375e;
+  }
 `
 
 export const LBOverlay = styled.div`
@@ -43,7 +52,7 @@ export const LBOverlay = styled.div`
 export const LBStyle = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   padding: 2rem 4rem;
   background: #1E2761;
   height: fit-content;
@@ -53,14 +62,15 @@ export const LBStyle = styled.div`
   border-radius: 8px;
   color: white;
   margin: 4rem;
-  text-align: left;
 `
 
-export const CurrentPointsStyle = styled.div`
-  color: white;
-  margin-right: 2rem;
-  margin-left: 2rem;
-  font-size: x-large;
+export const ResultStyle = styled.div`
+display: flex;
+font-family: 'Courier New', Courier, monospace;
+`
+
+export const Space = styled.div`
+  padding-right: 1rem;
 `
 
 export const GOOverlay = styled.div`
@@ -103,4 +113,7 @@ export const GOButton = styled.button`
   border-radius: 6px;
   width: 6rem;
   margin: 10px 10px 0px 10px;
+  &:hover {
+    background-color: #8d375e;
+  }
 `
