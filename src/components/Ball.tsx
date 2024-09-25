@@ -1,5 +1,6 @@
 import { CSSProperties, useState } from "react"
 import { BallProps } from "../interfaces"
+import { Bounce } from "react-awesome-reveal"
 
 export function Ball({ maxCount, x, y, handlePointsFromChild }: BallProps) {
     const [clicked, setClicked] = useState(0)
@@ -51,12 +52,15 @@ export function Ball({ maxCount, x, y, handlePointsFromChild }: BallProps) {
       boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
       padding: "5px"
     }
-  
+
+    // perustele animaatiopaketti
     return <>
+    <Bounce>
       <div
         style={ballStyle}
         onClick={handleClick}>
         {clicked} / {maxCount}
       </div>
+    </Bounce>
     </>
   }
