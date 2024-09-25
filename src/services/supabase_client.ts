@@ -12,7 +12,8 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseKey)
 
-
+/*Lisätään Supabase-palveluun tehdyn tietokannan ranking-tauluun tietue 
+parametrien perusteella.*/
 export const addPointsToDb = async (nickname: string, points: number) => {
   if (!nickname) {
     alert("Käyttäjänimi tarvitaan")
@@ -24,7 +25,7 @@ export const addPointsToDb = async (nickname: string, points: number) => {
       nickname: nickname,
       points: points
     }
-  ]).select()
+  ]) // .select()-lisäys palauttaisi lisätyn tietueen
 
   if (error) {
     alert("Tapahtui virhe: " + error.message)
@@ -32,11 +33,12 @@ export const addPointsToDb = async (nickname: string, points: number) => {
   }
 
   console.log(data)
-  return data.at(0)
 }
 
 
-// Selitä
+/*Haetaan Supabase-palveluun tehdyn tietokannan ranking-taulusta kaikki 
+tietueet. Sisällytetään niihin vain nickname- ja points-sarakkeiden arvot, 
+koska muiden sarakkeiden arvoja ei haluta näyttää etusivun pistetaululla.*/
 export const getResults = async () => {
   const { data, error } = await supabase.from("ranking").select("nickname, points")
 

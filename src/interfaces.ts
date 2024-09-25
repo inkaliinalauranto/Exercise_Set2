@@ -1,3 +1,5 @@
+// Objektityyppien määrittelyt:
+
 export interface ResultItemProps {
   nickname: string
   points: number

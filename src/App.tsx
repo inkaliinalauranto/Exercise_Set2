@@ -3,10 +3,11 @@ import { Outlet, Link } from "react-router-dom"
 import { LeaderBoard } from "./components/LeaderBoard"
 
 export default function App() {
-  // Perustele animaatiopaketti
+  /* Käytetään react-router-dom-kirjaston Link- ja Outlet-komponentteja 
+  pelisivulle navigointiin. */
   return <Layout>
     <Navigation>
-      <DescriptionStyle><DescriptionStyle>Pallonpoksautus</DescriptionStyle></DescriptionStyle>
+      <DescriptionStyle>Pallonpoksautus</DescriptionStyle>
       <Link to="/game"><NavigationButton>Aloita peli</NavigationButton></Link>
     </Navigation>
     {/* <input type={nickname} onChange={(e) => { setNickname(e.target.value) }} />

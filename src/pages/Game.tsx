@@ -12,7 +12,8 @@ function randomInteger(min: number, max: number) {
 
 
 export function Game() {
-  const [currentPoints, setTotalPoints] = useState(0)
+  const [currentPoints, setCurrentPoints] = useState(0)
+  const [maxPoints, setMaxPoints] = useState(0)
   const [showGameOver, setShowGameOver] = useState(false)
 
   /* Kun alla arrayhyn palautettavien kullekin pallolle generoitujen objektien 
@@ -45,18 +46,41 @@ export function Game() {
     })
   )
 
-  // Selitä
+
+  /*Määritellään useEffect-funktiokutsun toisella parametrilla eli tyhjällä 
+  arraylla, että ensimmäisenä parametrina oleva funktio ajetaan vain yhden 
+  kerran eli ensimmäisellä renderöinnillä. Lasketaan silloin funktion 
+  toteutusosassa propertiesForBalls-muuttujaan talletettujen objektien 
+  maksimiklikkausmääriä kuvaavien arvojen summa sum-muuttujaan. Talletetaan 
+  tulos maxPoints-tilamuuttujaan, jotta sitä voidaan verrata pelaajan 
+  klikkausten määrään seuraavassa useEffectissä.*/
   useEffect(() => {
     let sum = 0
     propertiesForBalls.forEach((propertyObject) => { sum += propertyObject.maxCount })
+    setMaxPoints(sum)
+  }, [])
 
-    if (currentPoints >= sum) {
+
+  /*Toisena parametrina arrayn sisään asetetaan currentPoints-tilamuuttuja, 
+  jonka arvon muutoksen perusteella tämä useEffect aktivoituu. Silloin 
+  pelaajan sen hetkisiä pisteitä eli currentPoints-muuttujan arvoa verrataan 
+  pelin maksimipisteisiin. Jos pelaajan pisteet yltävät maksimipisteisiin 
+  asetetaan showGameOver-tilamuuttujan arvo trueksi, jolloin returnissa 
+  näytetään GameOverBox-komponentti.*/
+  useEffect(() => {
+    if (currentPoints >= maxPoints) {
       setShowGameOver(true)
     }
-  })
+  }, [currentPoints])
 
+
+  /*Muuttujaan on talletettu funktio, jonka avulla parametrina tulevat 
+  pisteet lisätään pelaajan nykypisteisiin. Muuttuja välitetään propsina 
+  Ball-komponentille, jossa pisteet lisätään, kun komponenttia klikataan 
+  maksimiklikkausmäärän verran. Pisteet päivitetään siis lapsikomponentista
+  käsin. */
   const setPointsFromBall = (points: number) => {
-    setTotalPoints(currentPoints + points)
+    setCurrentPoints(currentPoints + points)
   }
 
   /* Luodaan propertiesForBalls-arrayssa olevien alkioiden verran palloja. 
@@ -81,9 +105,6 @@ export function Game() {
     
     Kirjaston GitHub-repositorio: 
     https://github.com/remix-run/react-router*/
-
-    // Aaltosulut mahdollistavat, että JS:ää voidaan käyttää
-    // niiden sisällä
     <>
       <Layout>
         <Navigation>
@@ -91,6 +112,9 @@ export function Game() {
           <DescriptionStyle>Pisteet: {currentPoints}</DescriptionStyle>
         </Navigation>
         {allBalls}
+        {/*Aaltosulkujen sisällä on mahdollistaa kirjoittaa suoraan 
+        TS-koodia. Jos showGameOver-tilamuuttujan arvo on tosi, näytetään 
+        GameOverBox-komponentti.*/}
         {showGameOver && <GameOverBox setShowGameOver={setShowGameOver} points={currentPoints}></GameOverBox>}
         <Outlet />
       </Layout>
