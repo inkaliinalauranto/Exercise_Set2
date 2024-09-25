@@ -6,6 +6,30 @@ uudelleenkäytettävien tyylikomponenttien tekemiseksi.
 Kirjaston GitHub-repositorio:
 https://github.com/styled-components/styled-components */
 
+export const LBOverlay = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+`
+
+export const LeaderBoardStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 4rem;
+  background: #1E2761;
+  height: fit-content;
+  width: fit-content;
+  box-shadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px";
+  border: 2px solid white;
+  border-radius: 8px;
+  color: white;
+  margin: 4rem;
+  text-align: left;
+`
+
+
 export const GameOver = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react"
+import { useState } from "react"
 import { GameOverProps } from "../interfaces"
 import { addPointsToDb } from "../services/supabase_client"
 import { GameOver, GameOverButton, GameOverElement, Overlay } from "./common"
@@ -10,15 +10,8 @@ export function GameOverBox({ setShowGameOver, points }: GameOverProps) {
 
   const onSave = async () => {
     if (!nickname) { return }
-    addPointsToDb(nickname, points)
+    await addPointsToDb(nickname, points)
     setShowGameOver(false)
-
-  }
-
-  function handleInput(e: FormEvent) {
-    const inputElement: HTMLInputElement = e.target as HTMLInputElement
-    const inputValue: string = inputElement.value
-    setNickname(inputValue)
   }
 
   return (
@@ -30,7 +23,7 @@ export function GameOverBox({ setShowGameOver, points }: GameOverProps) {
         <GameOverElement>
           <input
             value={nickname}
-            onInput={(e) => { handleInput(e) }}
+            onChange={(e) => { setNickname(e.target.value) }}
             id="nickname"
             type="text" />
         </GameOverElement>
