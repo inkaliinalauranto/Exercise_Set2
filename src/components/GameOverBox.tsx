@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { GameOverProps } from "../interfaces"
 import { addPointsToDb } from "../services/supabase_client"
-import { GameOver, GameOverButton, GameOverElement, Overlay } from "./common"
+import { GOStyle, GOButton, GOElement, GOOverlay } from "./common"
 import { Link, Outlet } from "react-router-dom"
 
 // Selitä
@@ -15,23 +15,23 @@ export function GameOverBox({ setShowGameOver, points }: GameOverProps) {
   }
 
   return (
-    <Overlay>
-      <GameOver>
+    <GOOverlay>
+      <GOStyle>
         <p>Läpäisit pelin!</p>
-        <GameOverElement><h3>Pisteet: {points}</h3></GameOverElement>
-        <GameOverElement><label htmlFor="nickname">Nimimerkki:</label></GameOverElement>
-        <GameOverElement>
+        <GOElement><h3>Pisteet: {points}</h3></GOElement>
+        <GOElement><label htmlFor="nickname">Nimimerkki:</label></GOElement>
+        <GOElement>
           <input
             value={nickname}
             onChange={(e) => { setNickname(e.target.value) }}
             id="nickname"
             type="text" />
-        </GameOverElement>
+        </GOElement>
 
-        <Link to="/"><GameOverButton onClick={onSave}>Tallenna</GameOverButton></Link>
-        <Link to="/"><GameOverButton>Ohita</GameOverButton></Link>
-      </GameOver>
+        <Link to="/"><GOButton onClick={onSave}>Tallenna</GOButton></Link>
+        <Link to="/"><GOButton>Ohita</GOButton></Link>
+      </GOStyle>
       <Outlet />
-    </Overlay>
+    </GOOverlay>
   )
 }

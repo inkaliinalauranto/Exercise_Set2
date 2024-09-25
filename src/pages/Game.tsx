@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Layout, Navigation, NavigationButton, TotalPoints } from "../components/common"
+import { Layout, Navigation, NavigationButton, CurrentPointsStyle } from "../components/common"
 import { Link, Outlet } from "react-router-dom"
 import { Ball } from "../components/Ball"
 import { GameOverBox } from "../components/GameOverBox"
@@ -88,7 +88,7 @@ export function Game() {
       <Layout>
         <Navigation>
           <Link to="/"><NavigationButton>Koti</NavigationButton></Link>
-          <TotalPoints>Pisteet: {currentPoints}</TotalPoints>
+          <CurrentPointsStyle>Pisteet: {currentPoints}</CurrentPointsStyle>
         </Navigation>
         {allBalls}
         {showGameOver && <GameOverBox setShowGameOver={setShowGameOver} points={currentPoints}></GameOverBox>}

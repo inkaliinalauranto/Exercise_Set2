@@ -14,23 +14,36 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseKey)
 
 
 export const addPointsToDb = async (nickname: string, points: number) => {
-    if (!nickname) {
-      alert("Käyttäjänimi tarvitaan")
-      return
-    }
-
-    const { data, error } = await supabase.from("ranking").insert([
-      {
-        nickname: nickname, 
-        points: points
-      }
-    ]).select()
-
-    if (error) {
-      alert("Tapahtui virhe: " + error.message)
-      return
-    }
-
-    console.log(data)
-    return data.at(0)
+  if (!nickname) {
+    alert("Käyttäjänimi tarvitaan")
+    return
   }
+
+  const { data, error } = await supabase.from("ranking").insert([
+    {
+      nickname: nickname,
+      points: points
+    }
+  ]).select()
+
+  if (error) {
+    alert("Tapahtui virhe: " + error.message)
+    return
+  }
+
+  console.log(data)
+  return data.at(0)
+}
+
+
+// Selitä
+export const getResults = async () => {
+  const { data, error } = await supabase.from("ranking").select("nickname, points")
+
+  if (error) {
+    alert("Tapahtui virhe: " + error.message)
+    return
+  }
+
+  return data
+}

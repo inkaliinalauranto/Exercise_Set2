@@ -6,60 +6,6 @@ uudelleenkäytettävien tyylikomponenttien tekemiseksi.
 Kirjaston GitHub-repositorio:
 https://github.com/styled-components/styled-components */
 
-export const LBOverlay = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: fit-content;
-`
-
-export const LeaderBoardStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 4rem;
-  background: #1E2761;
-  height: fit-content;
-  width: fit-content;
-  box-shadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px";
-  border: 2px solid white;
-  border-radius: 8px;
-  color: white;
-  margin: 4rem;
-  text-align: left;
-`
-
-
-export const GameOver = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 20px 30px 20px;
-  background: #1E2761;
-  height: fit-content;
-  width: 15rem;
-  box-shadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px";
-  border: 2px solid white;
-  border-radius: 8px;
-  color: white;
-`
-
-export const Overlay = styled.div`
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100dvh;
-  background: #a9a9a99c;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-export const GameOverElement = styled.div`
-  margin-bottom: 12px;
-`
-
 export const Layout = styled.div`
   background: pink;
   width: 100vw;
@@ -87,7 +33,67 @@ export const NavigationButton = styled.button`
   border-radius: 6px;
 `
 
-export const GameOverButton = styled.button`
+export const LBOverlay = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+`
+
+export const LBStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 4rem;
+  background: #1E2761;
+  height: fit-content;
+  width: fit-content;
+  box-shadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px";
+  border: 2px solid white;
+  border-radius: 8px;
+  color: white;
+  margin: 4rem;
+  text-align: left;
+`
+
+export const CurrentPointsStyle = styled.div`
+  color: white;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  font-size: x-large;
+`
+
+export const GOOverlay = styled.div`
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100dvh;
+  background: #a9a9a99c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const GOStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px 30px 20px;
+  background: #1E2761;
+  height: fit-content;
+  width: 15rem;
+  box-shadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px";
+  border: 2px solid white;
+  border-radius: 8px;
+  color: white;
+`
+
+export const GOElement = styled.div`
+  margin-bottom: 12px;
+`
+
+export const GOButton = styled.button`
   background: #7A2048;
   color: white;
   border: 1px solid white;
@@ -97,11 +103,4 @@ export const GameOverButton = styled.button`
   border-radius: 6px;
   width: 6rem;
   margin: 10px 10px 0px 10px;
-`
-
-export const TotalPoints = styled.div`
-  color: white;
-  margin-right: 2rem;
-  margin-left: 2rem;
-  font-size: x-large;
 `

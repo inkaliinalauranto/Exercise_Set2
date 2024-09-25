@@ -1,17 +1,29 @@
 import { useEffect, useState } from "react"
-import { Layout, Navigation, NavigationButton, LBOverlay, LeaderBoardStyle } from "./components/common"
+import { Layout, Navigation, NavigationButton, LBOverlay, LBStyle } from "./components/common"
 import { Outlet, Link } from "react-router-dom"
+import { getResults } from "./services/supabase_client"
 
 export function LeaderBoard() {
   return <LBOverlay>
-    <LeaderBoardStyle>
+    <LBStyle>
       <h1>Pistetilanne</h1>
       <p>Tähän pisteet</p>
-    </LeaderBoardStyle>
+    </LBStyle>
   </LBOverlay>
 }
 
 export default function App() {
+
+  /*Testataan pelisuoritustietojen haku tietokannasta. Annetaan 
+  useEffectille toiseksi parametriksi tyhjä array, jotta tietokantahaku 
+  tapahtuu vain komponentin ensimmäisen renderöinnin yhteydessä. Koska 
+  getResults on asynkroninen, hyödynnetään JS:n theniä. */
+  useEffect(() => {
+    getResults().then((results) => {
+      console.log(results)
+    })
+  }, [])
+
   return <Layout>
     <Navigation>
       <Link to="/game"><NavigationButton>Aloita peli</NavigationButton></Link>
