@@ -16,7 +16,7 @@ Siirry sivuvalikosta Project Settings -sivulle. Settings-sivun valikosta siirry 
 ## Ohjelman lataaminen ja riippuvuuksien asentaminen
 Avaa komentoterminaali, navigoi kansioon, johon haluat kloonata projektin ja kloona projekti ajamalla seuraava komento:
 ```
-https://github.com/inkaliinalauranto/Exercise_Set2.git
+git clone https://github.com/inkaliinalauranto/Exercise-Set1.git
 ```
 Siirry kloonattuun projektikansioon ajamalla komentoterminaalissa seuraava cd-komento. (Jos nimesit projektin muulla nimellä, kirjoita nimi Exercise_Set2-nimen tilalle.)
 ```
@@ -32,7 +32,7 @@ code .
 ```
 
 ## Ohjelman konfigurointi ja käynnistäminen
-Vaihda vasemman laidan tiedostopuun ".env_example"-tiedoston nimeksi ".env". 
+Paina vasemman laidan tiedostopuun ".env_example"-tiedoston kohdalla näppäintä "F2" ja vaihda nimeksi ".env". Paina enter-näppäintä nimen syöttämisen jälkeen, jotta tiedoston nimi päivittyy.
 
 ![Ohjekuva tarvittavista sarakkeista](ohjekuva2.png)
 
