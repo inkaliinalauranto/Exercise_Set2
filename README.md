@@ -37,7 +37,7 @@ Aseta VITE_SUPABASE_KEY-muttujassa olevien lainausmerkkien väliin ensimmäiseks
 Avaa komentoterminaali editorissa painamalla näppäinyhdistelmää "CTRL + C" tai painamalla ylävalikon Terminal-otsikon alta kohtaa "New Terminal". Älä siirry terminaalissa projektin juurisijainnaista. 
 
 Käynnistä kehitysympäristö ajamalla seuraava komento
-````
+```
 npm run dev
 ```
 Siirry sen jälkeen osoitteeseen http://localhost:5173/, jossa sovellus on nyt käynnissä.
