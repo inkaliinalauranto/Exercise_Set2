@@ -1,7 +1,9 @@
 import styled from "styled-components"
 
-/* Tehtävä 2: styled-components-kirjaston hyödyntäminen itsekustomoitujen 
-uudelleenkäytettävien tyylikomponenttien tekemiseksi. 
+/* Tehtävä 2.1: styled-components-kirjaston hyödyntäminen itsekustomoitujen 
+uudelleenkäytettävien tyylikomponenttien tekemiseksi. Komponentit ovat 
+käytössä eri puolilla koodia vaikuttaen pelin ulkoasuun ja mahdollisesti 
+myös käyttäjäkokemukseen positiivisesti. 
 
 Kirjaston GitHub-repositorio:
 https://github.com/styled-components/styled-components */
@@ -37,6 +39,7 @@ export const NavigationButton = styled.button`
   font-size: medium;
   font-weight: bold;
   border-radius: 6px;
+  cursor: pointer;
   &:hover {
     background-color: #8d375e;
   }
@@ -113,7 +116,13 @@ export const GOButton = styled.button`
   border-radius: 6px;
   width: 6rem;
   margin: 10px 10px 0px 10px;
+  cursor: pointer;
   &:hover {
     background-color: #8d375e;
+  };
+  &:disabled {
+    background: #7A2048;
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 `

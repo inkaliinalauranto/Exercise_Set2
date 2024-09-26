@@ -3,17 +3,10 @@ import { Layout, Navigation, NavigationButton, DescriptionStyle } from "../compo
 import { Link, Outlet } from "react-router-dom"
 import { Ball } from "../components/Ball"
 import { GameOverBox } from "../components/GameOverBox"
-
-
-function randomInteger(min: number, max: number) {
-  const randomInt = Math.floor((Math.random() * (max - min)) + min)
-  return randomInt
-}
-
+import { randomInteger } from "../functions"
 
 export function Game() {
   const [currentPoints, setCurrentPoints] = useState(0)
-  const [maxPoints, setMaxPoints] = useState(0)
   const [showGameOver, setShowGameOver] = useState(false)
 
   /* Kun alla arrayhyn palautettavien kullekin pallolle generoitujen objektien 
@@ -47,38 +40,31 @@ export function Game() {
   )
 
 
-  /*Määritellään useEffect-funktiokutsun toisella parametrilla eli tyhjällä 
-  arraylla, että ensimmäisenä parametrina oleva funktio ajetaan vain yhden 
-  kerran eli ensimmäisellä renderöinnillä. Lasketaan silloin funktion 
+  /*Tehtävä 2.1: lisäominaisuus 
+  Toisena parametrina asetetaan arrayn sisään currentPoints-tilamuuttuja, 
+  jonka arvon muutoksen perusteella tämä useEffect aktivoituu komponentin 
+  ensimmäisen renderöintikerran lisäksi. Lasketaan silloin funktion 
   toteutusosassa propertiesForBalls-muuttujaan talletettujen objektien 
-  maksimiklikkausmääriä kuvaavien arvojen summa sum-muuttujaan. Talletetaan 
-  tulos maxPoints-tilamuuttujaan, jotta sitä voidaan verrata pelaajan 
-  klikkausten määrään seuraavassa useEffectissä.*/
-  useEffect(() => {
-    let sum = 0
-    propertiesForBalls.forEach((propertyObject) => { sum += propertyObject.maxCount })
-    setMaxPoints(sum)
-  }, [])
-
-
-  /*Toisena parametrina arrayn sisään asetetaan currentPoints-tilamuuttuja, 
-  jonka arvon muutoksen perusteella tämä useEffect aktivoituu. Silloin 
-  pelaajan sen hetkisiä pisteitä eli currentPoints-muuttujan arvoa verrataan 
+  maksimiklikkausmääriä kuvaavien arvojen summa sum-muuttujaan. Verrattaan 
+  sen jälkeen pelaajan sen hetkisiä pisteitä eli currentPoints-muuttujan arvoa  
   pelin maksimipisteisiin. Jos pelaajan pisteet yltävät maksimipisteisiin 
   asetetaan showGameOver-tilamuuttujan arvo trueksi, jolloin returnissa 
   näytetään GameOverBox-komponentti.*/
   useEffect(() => {
-    if (currentPoints >= maxPoints) {
+    let sum = 0
+    propertiesForBalls.forEach((propertyObject) => { sum += propertyObject.maxCount })
+    if (currentPoints >= sum) {
       setShowGameOver(true)
     }
   }, [currentPoints])
 
 
-  /*Muuttujaan on talletettu funktio, jonka avulla parametrina tulevat 
+  /*Tehtävä 2.1: lisäominaisuus
+  Muuttujaan on talletettu funktio, jonka avulla parametrina tulevat 
   pisteet lisätään pelaajan nykypisteisiin. Muuttuja välitetään propsina 
   Ball-komponentille, jossa pisteet lisätään, kun komponenttia klikataan 
   maksimiklikkausmäärän verran. Pisteet päivitetään siis lapsikomponentista
-  käsin. */
+  käsin.*/
   const setPointsFromBall = (points: number) => {
     setCurrentPoints(currentPoints + points)
   }
@@ -100,20 +86,23 @@ export function Game() {
   })
 
   return (
-    /* Tehtävä 2: navigointi React-router-kirjaston Link- ja 
-    Outlet-komponentteja hyödyntämällä.
-    
-    Kirjaston GitHub-repositorio: 
-    https://github.com/remix-run/react-router*/
     <>
       <Layout>
         <Navigation>
+          {/*Fragmenteissa aaltosulkujen sisälle on mahdollistaa kirjoittaa 
+          suoraan TS-koodia.*/
+          
+          /*Tehtävä 2.1: lisäominaisuus
+          Pelin aikana on mahdollista navigoida takaisin etusivulle */}
           <Link to="/"><NavigationButton>Koti</NavigationButton></Link>
+          {/*
+          Tehtävä 2.1: lisäominaisuus
+          Näytetään pelaajan keräämät pisteet pelin aikana:*/}
           <DescriptionStyle>Pisteet: {currentPoints}</DescriptionStyle>
         </Navigation>
         {allBalls}
-        {/*Aaltosulkujen sisällä on mahdollistaa kirjoittaa suoraan 
-        TS-koodia. Jos showGameOver-tilamuuttujan arvo on tosi, näytetään 
+        {/*Tehtävä 2.1: lisäominaisuus
+        Jos showGameOver-tilamuuttujan arvo on tosi, näytetään 
         GameOverBox-komponentti.*/}
         {showGameOver && <GameOverBox setShowGameOver={setShowGameOver} points={currentPoints}></GameOverBox>}
         <Outlet />

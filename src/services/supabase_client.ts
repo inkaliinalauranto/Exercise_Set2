@@ -36,7 +36,8 @@ export const addPointsToDb = async (nickname: string, points: number) => {
 }
 
 
-/*Haetaan Supabase-palveluun tehdyn tietokannan ranking-taulusta kaikki 
+/*Tehtävä 2: lisäominaisuus
+Haetaan Supabase-palveluun tehdyn tietokannan ranking-taulusta kaikki 
 tietueet. Sisällytetään niihin vain nickname- ja points-sarakkeiden arvot, 
 koska muiden sarakkeiden arvoja ei haluta näyttää etusivun pistetaululla.*/
 export const getResults = async () => {
