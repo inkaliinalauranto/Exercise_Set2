@@ -7,7 +7,7 @@ Supabase-tietokantaan siirtämisessä ja siellä säilyttämisessä.
 Kirjaston dokumentaatio: 
 https://supabase.com/docs/reference/javascript/start */
 
-const supabaseUrl = 'https://pvvokutjnjbehmiwoxow.supabase.co'
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseKey)

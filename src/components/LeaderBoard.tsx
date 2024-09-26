@@ -21,6 +21,13 @@ export function LeaderBoard() {
     })
   }, [])
 
+  /*Tehtävä 2.2
+  Hyödynnetään Reactille tarkoitettua React Awesome Reveal 
+  -TypeScript-kirjastoa. Pistetaulu asetetaan Fade-komponentin sisään, 
+  jolloin pistetaululle saadaan häivytysanimaatio. 
+  
+  Kirjaston GitHub-repositorio: 
+  https://github.com/awesome-reveal/react-awesome-reveal */
   return <>
     <LBOverlay>
       <Fade>

@@ -29,7 +29,7 @@ export function Game() {
   maxCount-arvot läpi useEffectissä.*/
 
   const [propertiesForBalls] = useState(
-    Array(5).fill(null).map((_, i) => {
+    Array(10).fill(null).map((_, i) => {
       return {
         key: i,
         maxCount: randomInteger(1, 6),
