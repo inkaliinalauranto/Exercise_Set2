@@ -16,11 +16,11 @@ Siirry sivuvalikosta Project Settings -sivulle. Settings-sivun valikosta siirry 
 ## Ohjelman lataaminen ja riippuvuuksien asentaminen
 Avaa komentoterminaali, navigoi kansioon, johon haluat kloonata projektin ja kloona projekti ajamalla seuraava komento:
 ```
-https://github.com/inkaliinalauranto/React_TypeScript_Exercise_Set2.git
+https://github.com/inkaliinalauranto/Exercise_Set2.git
 ```
-Siirry kloonattuun projektikansioon ajamalla komentoterminaalissa seuraava cd-komento. (Jos nimesit projektin muulla nimellä, kirjoita nimi React_TypeScript_Exercise_Set2-nimen tilalle.)
+Siirry kloonattuun projektikansioon ajamalla komentoterminaalissa seuraava cd-komento. (Jos nimesit projektin muulla nimellä, kirjoita nimi Exercise_Set2-nimen tilalle.)
 ```
-cd React_TypeScript_Exercise_Set2
+cd Exercise_Set2
 ```
 Aja sen jälkeen komentoterminaalissa seuraava riippuvuudet asentava komento:
 ```
