@@ -104,7 +104,7 @@ export function Game() {
         {/*Tehtävä 2.1: lisäominaisuus
         Jos showGameOver-tilamuuttujan arvo on tosi, näytetään 
         GameOverBox-komponentti.*/}
-        {showGameOver && <GameOverBox setShowGameOver={setShowGameOver} points={currentPoints}></GameOverBox>}
+        {showGameOver && <GameOverBox setShowGO={setShowGameOver} points={currentPoints}></GameOverBox>}
         <Outlet />
       </Layout>
     </>

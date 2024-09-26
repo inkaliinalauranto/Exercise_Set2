@@ -23,6 +23,6 @@ export interface BallProps {
 }
 
 export interface GameOverProps {
-  setShowGameOver: (p: boolean) => void
+  setShowGO: (val: boolean) => void
   points: number
 }

@@ -1,9 +1,9 @@
-## Pallopeliselainohjelma
+# Pallopeliselainohjelma
 
 ## Esivalmistelut
 Asenna Node.js-ympäristö ja Visual Studio Code -editorisovellus.
 
-Tee [Supabase-palveluun](https://supabase.com/) käyttäjä ja luo uusi projekti. Siirry sivuvalikosta Table Editor -sivulle. Paina sivun keskellä olevaa "Create a new table" -nappia. Syötä Name-kenttään ranking. Täppää Enable Row Security pois päältä. Lisää sarakkeet seuraavilla arvoilla:
+Tee [Supabase-palveluun](https://supabase.com/) käyttäjä ja luo uusi projekti. Siirry sivuvalikosta Table Editor -sivulle. Paina sivun keskellä olevaa "Create a new table" -nappia. Syötä Name-kenttään "ranking". Täppää Enable Row Security pois päältä. Lisää sarakkeet seuraavilla arvoilla:
 - Name: id, Type: int8, Primary: täppä, Is Identity: täppä
 - Name: created_at, Type: timestamptz, Default Value: now()
 - Name: points, Type: int8
@@ -56,4 +56,4 @@ Projektissa käytetään seuraavia paketteja:
 Kehityspalvelimena projektissa käytetään Vite-työkalua. Ohjelma on toteutettu React-sovelluskehyksellä ja TypeScript-kielellä.
 
 ## Esimerkki projektin toiminnasta
-Ohjelman toimintaa esittelevä esimerkkivideo löytyy seuraavan linkin takaa: 
+Lopputulos näkyy ohjelman toimintaa esittelevällä [esimerkkivideolla](https://youtu.be/YCWQIzUgMRo).

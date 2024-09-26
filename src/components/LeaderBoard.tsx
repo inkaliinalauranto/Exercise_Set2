@@ -9,15 +9,19 @@ import { ResultList } from "./ResultList"
 haetaan Supabase-palveluun tehdyn tietokannan ranking-taulusta. */
 export function LeaderBoard() {
   const [results, setResults] = useState([{ nickname: "", points: 0 }])
+  const [isFetched, setIsFetched] = useState(false)
 
   /*Kun komponentti renderöidään ensimmäisen kerran (toisena parametrina 
   tyhjä array), haetaan pelisuoritukset tietokannasta 
   results-tilamuuttujaan. Koska getResults on asynkroninen, hyödynnetään 
-  JavaScriptin then-metodia. */
+  JavaScriptin then-metodia. Asetetaan myös isFetched-tilamuuttujan arvo 
+  todeksi, jolloin pistetaulukomponentti palautetaan kokonaisuudessaan 
+  returnissa.*/
   useEffect(() => {
     getResults().then((resultsData) => {
       const resultsArray: ResultProps[] = resultsData as ResultProps[]
       setResults(resultsArray)
+      setIsFetched(true)
     })
   }, [])
 
@@ -29,7 +33,10 @@ export function LeaderBoard() {
   Kirjaston GitHub-repositorio: 
   https://github.com/awesome-reveal/react-awesome-reveal */
   return <>
-    <LBOverlay>
+    {/*Palautetaan eli näytetään komponentti vasta, kun isFetchedin arvo 
+    on tosi. Arvo muutetaan todeksi useEffectissä, kun pelisuoritukset on 
+    haettu tietokannasta. */}
+    {isFetched && <LBOverlay>
       <Fade>
         <LBStyle>
           <h1>Pistetilanne</h1>
@@ -38,6 +45,6 @@ export function LeaderBoard() {
           <ResultList results={results} />
         </LBStyle>
       </Fade>
-    </LBOverlay>
+    </LBOverlay>}
   </>
 }

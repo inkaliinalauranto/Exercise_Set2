@@ -11,7 +11,7 @@ eli näytetään mm. pisteet. Lisäksi pelaajan on mahdollista viedä oma
 suoritus tietokantaan syöttämällä nimimerkki input-kenttään ja painamalla 
 Tallenna-nappia, minkä jälkeen navigoidaan etusivulle. Vaihtoehtoisesti 
 pelaaja voi painaa Ohita-nappia, joka myös on linkki etusivulle.*/
-export function GameOverBox({ setShowGameOver, points }: GameOverProps) {
+export function GameOverBox({ setShowGO: setShowGameOver, points }: GameOverProps) {
   const [nickname, setNickname] = useState("")
   /*Totuusarvomuotoinen tilamuuttuja, jonka arvo määrittelee sen, onko 
   Tallenna-nappi enabloitu.*/
@@ -47,7 +47,7 @@ export function GameOverBox({ setShowGameOver, points }: GameOverProps) {
     setShowGameOver(false)
   }
 
-  return (<>
+  return <>
     <GOOverlay>
       {/*Tehtävä 2.2
       Hyödynnetään Reactille tarkoitettua React Awesome Reveal 
@@ -83,5 +83,4 @@ export function GameOverBox({ setShowGameOver, points }: GameOverProps) {
       <Outlet />
     </GOOverlay>
   </>
-  )
 }
