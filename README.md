@@ -36,7 +36,7 @@ Paina vasemman laidan tiedostopuun ".env_example"-tiedoston kohdalla näppäint�
 
 ![Ohjekuva tarvittavista sarakkeista](ohjekuva2.png)
 
-Aseta VITE_SUPABASE_KEY-muttujassa olevien lainausmerkkien väliin Supabase-palvelusta ensimmäiseksi tallettamasi satunnaisia merkkejä sisältävä merkkijono. Aseta VITE_SUPABASE_URL-muuttujassa olevien lainausmerkkien sisään viimeiseksi tallettamasi URL-osoitteen muotoinen merkkijono. Tallenna muutokset painamalla näppäinyhdistelmää "CTRL + S" tai valitsemalla editorin ylävalikosta "File" ja edelleen "Save".
+Aseta VITE_SUPABASE_URL-muuttujassa olevien lainausmerkkien sisään ensimmäiseksi tallettamasi URL-osoitteen muotoinen merkkijono. Aseta VITE_SUPABASE_KEY-muttujassa olevien lainausmerkkien väliin Supabase-palvelusta viimeiseksi tallettamasi satunnaisia merkkejä sisältävä merkkijono. Tallenna muutokset painamalla näppäinyhdistelmää "CTRL + S" tai valitsemalla editorin ylävalikosta "File" ja edelleen "Save".
 
 Avaa komentoterminaali editorissa painamalla näppäinyhdistelmää "CTRL + Ö" tai painamalla ylävalikon Terminal-otsikon alta kohtaa "New Terminal". Älä siirry terminaalissa projektin juurisijainnaista muualle. 
 
