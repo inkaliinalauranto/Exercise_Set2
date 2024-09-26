@@ -11,12 +11,12 @@ Tee [Supabase-palveluun](https://supabase.com/) käyttäjä ja luo uusi projekti
 
 ![Ohjekuva tarvittavista sarakkeista](ohjekuva1.png)
 
-Siirry sivuvalikosta Project Settings -sivulle. Settings-sivun valikosta siirry CONFIGURATION-otsikon alta API-sivulle. Kopioi sivulla olevasta Project API Keys -laatikosta ensimäisessä kentässä oleva merkkijono. Kentän tag on public. Ota merkkijono talteen. Siirry sivuvalikosta API Docs -sivulle. Avaa GETTING STARTED -otsikon alla oleva Introduction-sivu. Ota talteen sivulla näkyvä const supabaseUrl -muuttujaan asetettu merkkijono. Talteen oton yhteydessä jätä merkkijonosta sitä ympäröivät heittomerkit pois. 
+Siirry sivuvalikosta Project Settings -sivulle. Settings-sivun valikosta siirry CONFIGURATION-otsikon alta API-sivulle. Kopioi sivulla olevasta Project URL -laatikossa olevan kentän sisältö. Kentän otsikko on URL. Ota kopioitu merkkijono talteen. Kopio sitten Project API Keys -laatikon ensimäisessä kentässä oleva merkkijono. Kentän tag on public. Ota myös tämä merkkijono talteen.
 
 ## Ohjelman lataaminen ja riippuvuuksien asentaminen
 Avaa komentoterminaali, navigoi kansioon, johon haluat kloonata projektin ja kloona projekti ajamalla seuraava komento:
 ```
-git clone https://github.com/inkaliinalauranto/Exercise-Set1.git
+git clone https://github.com/inkaliinalauranto/Exercise_Set2.git
 ```
 Siirry kloonattuun projektikansioon ajamalla komentoterminaalissa seuraava cd-komento. (Jos nimesit projektin muulla nimellä, kirjoita nimi Exercise_Set2-nimen tilalle.)
 ```
