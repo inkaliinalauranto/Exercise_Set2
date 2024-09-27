@@ -5,9 +5,9 @@ Asenna Node.js-ympäristö ja Visual Studio Code -editorisovellus.
 
 Tee [Supabase-palveluun](https://supabase.com/) käyttäjä, ja luo uusi projekti. Varmista sen jälkeen, että projekti on avattuna, ja siirry sivuvalikosta Table Editor -sivulle. Paina sivun keskellä olevaa Create a new table -nappia. Syötä Name-kenttään "ranking". Täppää "Enable Row Level Security" pois päältä. Lisää sarakkeet seuraavilla arvoilla:
 - Name: id, Type: int8, Primary: täppä, Is Identity: täppä
-- Name: created_at, Type: timestamptz, Default Value: now()
+- Name: created_at, Type: timestamptz, Default Value: now(), Is Nullable: ei täppää
 - Name: points, Type: int8, Default Value: 0, Is Nullable: ei täppää
-- Name: nickname, Type: text, not null, Is Nullable: ei täppää
+- Name: nickname, Type: text, Is Nullable: ei täppää
 
 ![Ohjekuva tarvittavista sarakkeista](ohjekuva1.png)
 
