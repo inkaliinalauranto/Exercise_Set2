@@ -14,7 +14,7 @@ Tee [Supabase-palveluun](https://supabase.com/) käyttäjä ja luo uusi projekti
 Tallenna muutokset ja siirry sivuvalikosta Project Settings -sivulle. Settings-sivun valikosta siirry CONFIGURATION-otsikon alta API-sivulle. Kopioi sivulla olevan Project URL -laatikon sisällä olevan kentän sisältö. Kentän otsikko on URL. Ota kopioitu merkkijono talteen. Kopio sitten Project API Keys -laatikon ensimäisessä kentässä oleva merkkijono. Kentän tag on public. Ota myös tämä merkkijono talteen.
 
 ## Ohjelman lataaminen ja riippuvuuksien asentaminen
-Avaa komentoterminaali, navigoi kansioon, johon haluat kloonata projektin ja kloona projekti ajamalla seuraava komento:
+Avaa komentoterminaali, navigoi kansioon, johon haluat kloonata projektin, ja kloona projekti ajamalla seuraava komento:
 ```
 git clone https://github.com/inkaliinalauranto/Exercise_Set2.git
 ```
@@ -32,7 +32,7 @@ code .
 ```
 
 ## Ohjelman konfigurointi ja käynnistäminen
-Paina vasemman laidan tiedostopuun .env_example-tiedoston kohdalla näppäintä "F2" ja vaihda nimeksi ".env". Paina enter-näppäintä nimen syöttämisen jälkeen, jotta tiedoston nimi päivittyy.
+Paina vasemman laidan tiedostopuun .env_example-tiedostoa ja sitten näppäintä "F2". Vaihda nimeksi ".env", ja paina sen jälkeen enter-näppäintä, jotta tiedoston nimi päivittyy.
 
 ![Ohjekuva tarvittavista sarakkeista](ohjekuva2.png)
 
