@@ -58,12 +58,12 @@ export function Ball({ maxCount, x, y, handlePointsFromChild }: BallProps) {
     padding: "5px"
   }
 
-  /*Tehtävä 2.2
+  /*Tehtävä 2.2: itsevalitun kirjaston hyödyntäminen
   Hyödynnetään Reactille tarkoitettua React Awesome Reveal 
   -TypeScript-kirjastoa. Palautettava Ball-div asetetaan 
   Bounce-komponentin sisään, jotta palloille saadaan animaatio. 
   Välitetään Bounce-animaatiokomponentille propsina 
-  millisekuntimuotoinenkesto, joka arvotaan tehtyä randomInteger-funktiota 
+  millisekuntimuotoinen kesto, joka arvotaan tehtyä randomInteger-funktiota 
   hyödyntämällä.
   
   Kirjaston GitHub-repositorio: 

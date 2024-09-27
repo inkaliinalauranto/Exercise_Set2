@@ -11,7 +11,7 @@ Tee [Supabase-palveluun](https://supabase.com/) käyttäjä, ja luo uusi projekt
 
 ![Ohjekuva tarvittavista sarakkeista](ohjekuva1.png)
 
-Tallenna muutokset ja siirry sivuvalikosta Project Settings -sivulle. Settings-sivun valikosta siirry CONFIGURATION-otsikon alta API-sivulle. Kopioi sivulla olevan Project URL -laatikon sisällä olevan kentän sisältö. Kentän otsikko on URL. Ota kopioitu merkkijono talteen. Kopio sitten Project API Keys -laatikon ensimäisessä kentässä oleva merkkijono. Kentän tag on public. Ota myös tämä merkkijono talteen.
+Tallenna muutokset, ja siirry sivuvalikosta Project Settings -sivulle. Settings-sivun valikosta siirry CONFIGURATION-otsikon alta API-sivulle. Kopioi sivulla olevan Project URL -laatikon sisällä olevan kentän sisältö. Kentän otsikko on URL. Ota kopioitu merkkijono talteen. Kopio sitten Project API Keys -laatikon ensimäisessä kentässä oleva merkkijono. Kentän tag on public. Ota myös tämä merkkijono talteen.
 
 ## Ohjelman lataaminen ja riippuvuuksien asentaminen
 Avaa komentoterminaali, navigoi kansioon, johon haluat kloonata projektin, ja kloona projekti ajamalla seuraava komento:

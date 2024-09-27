@@ -1,7 +1,7 @@
 import { ResultsProps } from "../interfaces"
 import { Result } from "./Result"
 
-//Tehtävä 2.1 lisäominaisuus
+//Tehtävä 2.1: lisäominaisuus
 export function ResultList({ results }: ResultsProps) {
   /*Alustetaan muuttuja, jonka arvoa kasvatetaan, kun results-arrayta 
   iteroidaan. */

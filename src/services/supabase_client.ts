@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { Database } from "./supabase.ts"
 
-/* Tehtävä 2: Supabasen hyödyntäminen pelisuoritustietojen 
+/* Tehtävä 2.1 Supabasen hyödyntäminen pelisuoritustietojen 
 Supabase-tietokantaan siirtämisessä ja siellä säilyttämisessä.
 
 Kirjaston dokumentaatio: 
@@ -12,8 +12,8 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
 
 export const supabase = createClient<Database>(supabaseUrl, supabaseKey)
 
-/*Lisätään Supabase-palveluun tehdyn tietokannan ranking-tauluun tietue 
-parametrien perusteella.*/
+/*Funktio, joka lisää Supabase-palveluun tehdyn tietokannan ranking-tauluun 
+tietueen parametrien perusteella.*/
 export const addPointsToDb = async (nickname: string, points: number) => {
   if (!nickname) {
     alert("Käyttäjänimi tarvitaan")
@@ -36,7 +36,7 @@ export const addPointsToDb = async (nickname: string, points: number) => {
 }
 
 
-/*Tehtävä 2: lisäominaisuus
+/*Tehtävä 2.1: lisäominaisuus
 Haetaan Supabase-palveluun tehdyn tietokannan ranking-taulusta kaikki 
 tietueet. Sisällytetään niihin vain nickname- ja points-sarakkeiden arvot, 
 koska muiden sarakkeiden arvoja ei haluta näyttää etusivun pistetaululla.*/

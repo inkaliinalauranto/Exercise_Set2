@@ -9,15 +9,17 @@ export function Game() {
   const [currentPoints, setCurrentPoints] = useState(0)
   const [showGameOver, setShowGameOver] = useState(false)
 
-  /* Kun alla arrayhyn palautettavien kullekin pallolle generoitujen objektien 
-  arvot asetettin suoraan allBalls-muuttujaan, joka asetettiin suoraan 
+  /* propertiesForBalls-tilamuuttujan alustusarvoksi asetetaan array. Kun 
+  siihen palautettavien kullekin pallolle generoitujen objektien arvot 
+  asetettin aiemmin suoraan allBalls-muuttujaan, joka asetettiin suoraan 
   returniin, arvot muuttuivat aina, kun pallo poksautettiin. Arvot muuttuivat, 
   koska Ball-komponentissa kutsuttiin tästä komponentista välitettyä
   setPointsFromBall-muuttujaa, jossa muutetaan tämän Game-komponentin 
-  tilamuuttujaa (currentPoints). Tilamuuttujan arvon muutos laukaisee tässä 
-  komponentissa uudelleenrenderöinnin hook-muuttujia lukuunottamatta, minkä
-  vuoksi pallot arvottueine maxCount-, x- ja y-arvoineen luotiin uudestaan. 
-  Siksi pallot vaihtoivat paikkaa ja niissä olevaa maksimiklikkauslukua.
+  tilamuuttujaa (currentPoints). Tilamuuttujan arvonmuutos laukaisee tässä 
+  komponentissa uudelleenrenderöinnin muita hook-muuttujia lukuunottamatta, 
+  minkä vuoksi pallot arvottuine maxCount-, x- ja y-arvoineen luotiin 
+  uudestaan. Siksi pallot vaihtoivat paikkaa ja niissä olevaa 
+  maksimiklikkauslukua.
 
   Nyt pallojen ominaisuudet on asetettu objekteiksi arrayn sisälle 
   hook-muuttujaan, jonka arvo ilmeisesti pystyy samana komponentin 
@@ -41,15 +43,17 @@ export function Game() {
 
 
   /*Tehtävä 2.1: lisäominaisuus 
-  Toisena parametrina asetetaan arrayn sisään currentPoints-tilamuuttuja, 
-  jonka arvon muutoksen perusteella tämä useEffect aktivoituu komponentin 
-  ensimmäisen renderöintikerran lisäksi. Lasketaan silloin funktion 
-  toteutusosassa propertiesForBalls-muuttujaan talletettujen objektien 
-  maksimiklikkausmääriä kuvaavien arvojen summa sum-muuttujaan. Verrattaan 
-  sen jälkeen pelaajan sen hetkisiä pisteitä eli currentPoints-muuttujan arvoa  
-  pelin maksimipisteisiin. Jos pelaajan pisteet yltävät maksimipisteisiin 
-  asetetaan showGameOver-tilamuuttujan arvo trueksi, jolloin returnissa 
-  näytetään GameOverBox-komponentti.*/
+  Kutsutaan useEffect-funktiota, jonka toiseksi parametriksi asetetaan arrayn 
+  sisään currentPoints-tilamuuttuja. Sen arvonmuutoksen perusteella tämä 
+  useEffect aktivoituu komponentin ensimmäisen renderöintikerran lisäksi. 
+  useEffectin aktivoituessa kutsutaan sille ensimmäiseksi parametriksi 
+  määriteltyä funktiota. Parametrifunktion toteutusosassa yhteenlasketaan
+  propertiesForBalls-muuttujaan talletettujen objektien maksimiklikkausmääriä 
+  kuvaavien arvojen summa sum-muuttujaan. Verrattaan sen jälkeen pelaajan sen 
+  hetkisiä pisteitä eli currentPoints-muuttujan arvoa pelin maksimipisteisiin. 
+  Jos pelaajan pisteet yltävät maksimipisteisiin asetetaan 
+  showGameOver-tilamuuttujan arvo trueksi, jolloin returnissa näytetään 
+  GameOverBox-komponentti.*/
   useEffect(() => {
     let sum = 0
     propertiesForBalls.forEach((propertyObject) => { sum += propertyObject.maxCount })
@@ -72,7 +76,7 @@ export function Game() {
   /* Luodaan propertiesForBalls-arrayssa olevien alkioiden verran palloja. 
   Kunkin alkion objektin arvot haetaan kunkin pallon propseiksi. Propseihin 
   kullekin pallolle lisätään viite funktioon, jonka avulla Game-komponentissa 
-  saadaan pidettyä lukua pelaajan pisteistä eli siitä klikkausmäärästä, joilla 
+  saadaan pidettyä lukua pelaajan pisteistä eli siitä klikkausmäärästä, jolla 
   pelaaja on saanut palloja poksautettua.
   */
   const allBalls = propertiesForBalls.map((ballProperties) => {

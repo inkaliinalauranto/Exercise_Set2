@@ -5,7 +5,7 @@ import { GOStyle, GOButton, GOElement, GOOverlay } from "./common"
 import { Link, Outlet } from "react-router-dom"
 import { Fade } from "react-awesome-reveal"
 
-/*Tehtävä 2.1: lisäominaisuus
+/*Tehtävä 2.2: lisäominaisuus, jossa hyödynnetään itsevalittua kirjastoa
 Kun pelaaja läpäisee pelin, näytetään tämä komponentti, jossa palautetaan 
 eli näytetään mm. pisteet. Lisäksi pelaajan on mahdollista viedä oma 
 suoritus tietokantaan syöttämällä nimimerkki input-kenttään ja painamalla 
@@ -20,10 +20,10 @@ export function GameOverBox({ setShowGO: setShowGameOver, points }: GameOverProp
   /*Seurataan nickname-tilamuuttujan arvoa. Jos tilamuuttujassa on muitakin 
   merkkejä kuin välilyöntejä, asetetaan isDisabled-tilamuuttujan arvo 
   falseksi. Silloin käyttöliittymässä oleva nappi enabloidaan, koska napin 
-  disabled-propsille välitetään isDisabled-tilamuuttujan arvo, joka tässä 
-  tilanteessa on false. Muussa tapauksessa asetetaan tilamuuttujan arvo 
-  trueksi, jolloin nappia ei voi painaa. Silloin nimikenttään joko ei ole 
-  kirjoitettu tai kirjoitetut merkit ovat välilyöntejä. */
+  disabled-propsille välitetään isDisabled-tilamuuttujan arvo, joka silloin 
+  on false. Muussa tapauksessa asetetaan tilamuuttujan arvo trueksi, jolloin 
+  nappia ei voi painaa. Silloin nimikenttään joko ei ole kirjoitettu tai 
+  kirjoitetut merkit ovat välilyöntejä. */
   useEffect(() => {
     if (nickname.trim().length !== 0) {
       setIsDisabled(false)
@@ -35,12 +35,14 @@ export function GameOverBox({ setShowGO: setShowGameOver, points }: GameOverProp
   /*Kun käyttäjä klikkaa Tallenna-nappia, kutsutaan tähän muuttujaan 
   tallennettua funktiota. Funktio on asynkroninen, koska addPointsToDb
   on asynkroninen. Jos nimikenttään ei ole kirjoitettu, nappi on yllä 
-  olevan useEffect-funktiokutsun vuoksi disabloitu, nappia voi painaa eikä 
-  tätä funktiota kutsuta. Tuplatarkistetaan silti, että nimikenttään on 
-  kirjoitettu tarkastamalla nickname-tilamuuttujan arvo. Jos se on falsy, 
-  palataan funktiosta toimenpiteittä. Muussa tapauksessa lisätään pelaajan 
-  tiedot tietokantaan addPointsToDb-funktiota kutsumalla. Pisteet saadaan 
-  parent- eli Game-komponentilta propsina.*/
+  olevan useEffect-funktiokutsun vuoksi disabloitu, eikä nappia voi painaa. 
+  Kun nappia ei voi painaa, ei tätä funktiota kutsuta. 
+  
+  Tuplatarkistetaan silti, että nimikenttään on kirjoitettu tarkastamalla 
+  nickname-tilamuuttujan arvo. Jos se on falsy, palataan funktiosta 
+  toimenpiteittä. Muussa tapauksessa lisätään pelaajan tiedot tietokantaan 
+  addPointsToDb-funktiota kutsumalla. Pisteet saadaan parent- eli 
+  Game-komponentilta propsina.*/
   const onSave = async () => {
     if (!nickname) { return }
     await addPointsToDb(nickname, points)
@@ -49,7 +51,7 @@ export function GameOverBox({ setShowGO: setShowGameOver, points }: GameOverProp
 
   return <>
     <GOOverlay>
-      {/*Tehtävä 2.2
+      {/*Tehtävä 2.2: itsevalitun kirjaston hyödyntäminen
       Hyödynnetään Reactille tarkoitettua React Awesome Reveal 
       -TypeScript-kirjastoa. Varsinainen GameOver-ruutu asetetaan 
       Fade-komponentin sisään, jotta ruudulle saadaan animaatio. Välitetään 

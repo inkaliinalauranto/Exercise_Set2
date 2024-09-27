@@ -5,8 +5,9 @@ import { LBOverlay, LBStyle } from "./common"
 import { Fade } from "react-awesome-reveal"
 import { ResultList } from "./ResultList"
 
-/*Tehtävä 2.1 lisäominaisuus: etusivulla näytettävä pistetaulu. Tulokset 
-haetaan Supabase-palveluun tehdyn tietokannan ranking-taulusta. */
+/*Tehtävä 2.2: lisäominaisuus, jossa hyödynnetään itsevalittua kirjastoa 
+Etusivulla näytetään pistetaulu. Tulokset haetaan Supabase-palveluun tehdyn 
+tietokannan ranking-taulusta. */
 export function LeaderBoard() {
   const [results, setResults] = useState([{ nickname: "", points: 0 }])
   const [isFetched, setIsFetched] = useState(false)
@@ -25,7 +26,7 @@ export function LeaderBoard() {
     })
   }, [])
 
-  /*Tehtävä 2.2
+  /*Tehtävä 2.2: itsevalitun kirjaston hyödyntäminen
   Hyödynnetään Reactille tarkoitettua React Awesome Reveal 
   -TypeScript-kirjastoa. Pistetaulu asetetaan Fade-komponentin sisään, 
   jolloin pistetaululle saadaan häivytysanimaatio. 
